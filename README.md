@@ -44,3 +44,10 @@ Returns all normalized times found in *text* in order of appearance.
 
 Converts a regex match object from the internal time pattern to a normalized
 24-hour string. Primarily useful for callers who want to reuse the pattern.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
